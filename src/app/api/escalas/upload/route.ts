@@ -101,7 +101,7 @@ export async function POST(request: NextRequest) {
 
     if (checkError) {
       return NextResponse.json(
-        { message: `Erro ao verificar escalas existentes: ${checkError.message}` },
+        { message: `Erro ao verificar escalas existentes: ${checkError?.message || 'Erro desconhecido'}` },
         { status: 500 }
       );
     }
@@ -179,7 +179,7 @@ export async function POST(request: NextRequest) {
       } catch (error) {
         console.error('Erro durante limpeza de dados:', error);
         return NextResponse.json(
-          { message: `Erro ao limpar dados existentes: ${error.message}` },
+          { message: `Erro ao limpar dados existentes: ${error instanceof Error ? error.message : String(error)}` },
           { status: 500 }
         );
       }
@@ -240,7 +240,7 @@ export async function POST(request: NextRequest) {
           .single();
 
         if (colaboradorError) {
-          stats.errors.push(`Linha ${i + 1}: Erro ao salvar colaborador: ${colaboradorError.message}`);
+          stats.errors.push(`Linha ${i + 1}: Erro ao salvar colaborador: ${colaboradorError?.message || 'Erro desconhecido'}`);
           continue;
         }
 
@@ -263,7 +263,7 @@ export async function POST(request: NextRequest) {
           .single();
 
         if (escalaError) {
-          stats.errors.push(`Linha ${i + 1}: Erro ao salvar escala: ${escalaError.message}`);
+          stats.errors.push(`Linha ${i + 1}: Erro ao salvar escala: ${escalaError?.message || 'Erro desconhecido'}`);
           continue;
         }
 
@@ -299,7 +299,7 @@ export async function POST(request: NextRequest) {
               });
 
             if (diaError) {
-              stats.errors.push(`Linha ${i + 1}, Dia ${day}: ${diaError.message}`);
+              stats.errors.push(`Linha ${i + 1}, Dia ${day}: ${diaError?.message || 'Erro desconhecido'}`);
             } else {
               stats.dias++;
             }
@@ -307,7 +307,7 @@ export async function POST(request: NextRequest) {
         }
 
       } catch (error) {
-        stats.errors.push(`Linha ${i + 1}: Erro ao processar linha: ${error.message}`);
+        stats.errors.push(`Linha ${i + 1}: Erro ao processar linha: ${error instanceof Error ? error.message : String(error)}`);
       }
     }
 

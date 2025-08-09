@@ -390,7 +390,7 @@ function SolicitacoesContent() {
 
 export default function SolicitacoesPage() {
   return (
-    <ProtectedRoute allowedRoles={['supervisor', 'analista', 'gerencia', 'treinamento', 'ponto']}>
+    <ProtectedRoute>
       <SolicitacoesContent />
     </ProtectedRoute>
   );

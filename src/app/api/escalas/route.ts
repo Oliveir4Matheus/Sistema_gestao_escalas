@@ -82,9 +82,9 @@ export async function POST(request: NextRequest) {
       .eq('ativo', true);
 
     const filters = {
-      grupos: [...new Set(colaboradores?.map(c => c.grupo).filter(Boolean))] || [],
-      funcoes: [...new Set(colaboradores?.map(c => c.funcao).filter(Boolean))] || [],
-      cod_escalas: [...new Set(colaboradores?.map(c => c.cod_escala).filter(Boolean))] || []
+      grupos: Array.from(new Set(colaboradores?.map(c => c.grupo).filter(Boolean) || [])),
+      funcoes: Array.from(new Set(colaboradores?.map(c => c.funcao).filter(Boolean) || [])),
+      cod_escalas: Array.from(new Set(colaboradores?.map(c => c.cod_escala).filter(Boolean) || []))
     };
 
     // Ordenar todos os filtros alfabeticamente (A-Z)

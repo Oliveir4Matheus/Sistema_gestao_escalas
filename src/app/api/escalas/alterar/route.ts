@@ -142,6 +142,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Erro ao buscar escala' }, { status: 500 });
     }
 
+    if (!escala) {
+      return NextResponse.json({ error: 'Escala não encontrada' }, { status: 404 });
+    }
+
     // Determinar se o novo valor é um status ou horário
     const novoValor = valor_novo;
     const isDT = novoValor === '' || novoValor === 'DT'; // DT pode vir como string vazia ou 'DT'
@@ -188,7 +192,7 @@ export async function POST(request: NextRequest) {
       }
 
       escalaDia = novoDiaEscala;
-    } else if (!escalaDiaError) {
+    } else if (!escalaDiaError && escalaDia) {
       // Atualizar dia da escala existente
       const { data: diaAtualizado, error: updateDiaError } = await supabase
         .from('escala_dias')
@@ -212,6 +216,10 @@ export async function POST(request: NextRequest) {
     } else {
       console.error('Erro ao buscar dia da escala:', escalaDiaError);
       return NextResponse.json({ error: 'Erro ao buscar dia da escala' }, { status: 500 });
+    }
+
+    if (!escalaDia) {
+      return NextResponse.json({ error: 'Erro ao processar dia da escala' }, { status: 500 });
     }
 
     // Registrar a alteração direta como uma solicitação já aprovada para auditoria

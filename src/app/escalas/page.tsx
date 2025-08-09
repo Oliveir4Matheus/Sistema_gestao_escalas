@@ -350,7 +350,7 @@ function EscalasContent() {
         }
       }
     } catch (error) {
-      if (error.name === 'AbortError') {
+      if (error instanceof Error && error.name === 'AbortError') {
         console.error('🔵 DT_DEBUG - REQUEST TIMEOUT');
         alert('Timeout: A operação demorou muito. Tente novamente.');
       } else {
@@ -556,7 +556,7 @@ function EscalasContent() {
                   <select
                     className="text-xs border border-gray-200 rounded px-2 py-1.5 w-full bg-white text-gray-700 focus:border-blue-300 focus:ring-0"
                     value={activeFilters.grupo || ''}
-                    onChange={(e) => setActiveFilters(prev => ({ ...prev, grupo: e.target.value || undefined }))}
+                    onChange={(e) => setActiveFilters((prev: any) => ({ ...prev, grupo: e.target.value || undefined }))}
                   >
                     <option value="">Todos</option>
                     {filters.grupos?.map((grupo: string) => (
@@ -570,7 +570,7 @@ function EscalasContent() {
                   <select
                     className="text-xs border border-gray-200 rounded px-2 py-1.5 w-full bg-white text-gray-700 focus:border-blue-300 focus:ring-0"
                     value={activeFilters.funcao || ''}
-                    onChange={(e) => setActiveFilters(prev => ({ ...prev, funcao: e.target.value || undefined }))}
+                    onChange={(e) => setActiveFilters((prev: any) => ({ ...prev, funcao: e.target.value || undefined }))}
                   >
                     <option value="">Todas</option>
                     {filters.funcoes?.map((funcao: string) => (

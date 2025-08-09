@@ -138,6 +138,10 @@ export async function PUT(
         return NextResponse.json({ error: 'Erro ao buscar escala' }, { status: 500 });
       }
 
+      if (!escala) {
+        return NextResponse.json({ error: 'Escala não encontrada' }, { status: 404 });
+      }
+
       // Buscar ou criar o dia da escala
       let { data: escalaDia, error: escalaDiaError } = await supabase
         .from('escala_dias')
@@ -181,7 +185,7 @@ export async function PUT(
           console.error('Erro ao criar dia da escala:', createDiaError);
           return NextResponse.json({ error: 'Erro ao criar dia da escala' }, { status: 500 });
         }
-      } else if (!escalaDiaError) {
+      } else if (!escalaDiaError && escalaDia) {
         // Atualizar dia da escala existente
         const { error: updateDiaError } = await supabase
           .from('escala_dias')

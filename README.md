@@ -85,24 +85,20 @@ npm install
 #### Criar projeto no Supabase:
 1. Acesse [supabase.com](https://supabase.com)
 2. Crie um novo projeto
-3. Execute os scripts SQL na ordem:
+3. Execute o script SQL completo:
 
 ```bash
-# 1. Schema principal
-database_schema.sql
-
-# 2. Correções e ajustes
-fix_database_schema.sql
-
-# 3. Adicionar status DT
-add_dt_status_enum.sql
-
-# 4. Atualizar tabela de solicitações
-update_solicitacoes_table.sql
-
-# 5. Funções auxiliares
-supabase_functions.sql
+# Schema completo do sistema (inclui todas as tabelas, triggers e dados iniciais)
+schema.sql
 ```
+
+**Importante**: O arquivo `schema.sql` contém toda a estrutura necessária do banco de dados, incluindo:
+- Criação de todas as tabelas e relacionamentos
+- Enums e tipos personalizados (incluindo status DT)
+- Índices para performance otimizada
+- Triggers e funções automatizadas
+- Usuário administrador padrão
+- Comentários e documentação das tabelas
 
 ### 4. Variáveis de Ambiente
 

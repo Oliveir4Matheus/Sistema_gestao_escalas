@@ -1,0 +1,39 @@
+# Diretórios do Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build do Next.js
+.next/
+out/
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Editor de código
+.vscode/
+.idea/
+
+# Cache do Next.js e ferramentas
+.next/
+.cache/
+turbo/
+
+# Arquivos de lock (caso você use apenas um gerenciador, pode remover os outros)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
